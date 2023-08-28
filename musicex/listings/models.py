@@ -15,6 +15,8 @@ class Band(models.Model):
     )
     active = models.BooleanField(default=True)
     official_homepage = models.URLField(null=True, blank=True)
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Listing(models.Model):

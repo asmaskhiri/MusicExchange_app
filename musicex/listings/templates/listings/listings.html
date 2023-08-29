@@ -4,7 +4,8 @@
         
         <ul>
             {% for list in liste %}
-            <li>{{ list.title }}</li>
+             <li><a href="{% url 'ad-detail' list.id %}">{{ list.title  }}</a></li>
+
             {% endfor %}
         </ul>
         

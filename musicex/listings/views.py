@@ -25,6 +25,28 @@ def band_detail(request, id):  # notez le paramètre id supplémentaire
                  {'band': band})  # nous mettons à jour cette ligne pour passer le groupe au gabarit
 
 
+def band_update(request, id):
+    try:
+        band = Band.objects.get(id=id)  # nous insérons cette ligne pour obtenir le Band avec cet id
+
+        if request.method == 'POST':
+            form = BandForm(request.POST, instance=band)
+            if form.is_valid():
+                # mettre à jour le groupe existant dans la base de données
+                form.save()
+                # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
+                return redirect('band-detail', band.id)
+        else:
+
+              form = BandForm(instance=band)  # on pré-remplir le formulaire avec un groupe existant
+
+    except Band.DoesNotExist:
+        raise Http404("this id does not exist")
+    return render(request,
+                  'listings/band_update.html',
+                  {'form': form})
+
+
 def band_create(request):
     if request.method == 'POST':
         form = BandForm(request.POST)
@@ -59,6 +81,28 @@ def listing_detail(request, id):  # notez le paramètre id supplémentaire
     return render(request,
                  'listings/listing_detail.html',
                  {'ad': ad})  # nous mettons à jour cette ligne pour passer le groupe au gabarit
+
+
+def listing_update(request, id):
+    try:
+        ad = Listing.objects.get(id=id)  # nous insérons cette ligne pour obtenir le Band avec cet id
+
+        if request.method == 'POST':
+            form = ListingForm(request.POST, instance=ad)
+            if form.is_valid():
+                # mettre à jour le groupe existant dans la base de données
+                form.save()
+                # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
+                return redirect('ad-detail', ad.id)
+        else:
+
+            form = ListingForm(instance=ad)  # on pré-remplir le formulaire avec un groupe existant
+    except Listing.DoesNotExist:
+        raise Http404("this id does not exist")
+
+    return render(request,
+                  'listings/list_update.html',
+                  {'form': form})  # nous mettons à jour cette ligne pour passer le groupe au gabarit
 
 def listing_create(request):
     if request.method == 'POST':

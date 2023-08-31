@@ -5,7 +5,11 @@
         
         <ul>
             {% for list in liste %}
-             <li><a href="{% url 'ad-detail' list.id %}">{{ list.title  }}</a></li>
+             <li>
+                 <a href="{% url 'ad-detail' list.id %}">{{ list.title  }}</a>
+                - <a href="{% url 'ad-update' list.id %}">[modifier]</a>
+             </li>
+
 
             {% endfor %}
         </ul>

@@ -1,1 +1,6 @@
-* { background: red }
+* {
+    background: #fdffcd;
+}
+.errorlist {
+   margin-bottom: -10px
+}

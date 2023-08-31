@@ -8,10 +8,11 @@
     <body>
     <nav>
      <a href="{% url 'band-list' %}">Groupes</a>
+        <a href="{% url 'list-ads' %}">Annonces</a>
+        <a href="{% url 'contact' %}">contact</a>
+        <a href="{% url 'about' %}">about-us</a>
    </nav>
- <nav>
-     <a href="{% url 'list-ads' %}">Annoances</a>
-   </nav>
+
         {% block content %} {% endblock %}
     </body>
 </html>

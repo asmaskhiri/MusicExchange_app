@@ -9,7 +9,7 @@ class Band(models.Model):
         ALTERNATIVE_ROCK = 'AR'
     name = models.CharField(max_length=100)
     genre = models.CharField(choices=Genre.choices, max_length=5)
-    biography = models.CharField(max_length=100)
+    biography = models.CharField(max_length=1000)
     year_formed = models.IntegerField(
         validators=[MinValueValidator(1900), MaxValueValidator(2023)]
     )
@@ -28,12 +28,13 @@ class Listing(models.Model):
         miscellaneous = 'Miscellaneous'
 
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
     sold = models.BooleanField(default=False)
     year_article = models.IntegerField(
         validators=[MinValueValidator(1900), MaxValueValidator(2023)], null=True, blank=True)
     type = models.CharField(choices=Type.choices, max_length=20)
-    band = models.ForeignKey(Band, null=True, on_delete=models.SET_NULL)
+    band = models.ForeignKey(Band, null=True, on_delete=models.SET_NULL)#Nous ne voulons pas supprimer
+    # l'objet Listing si un Band est supprimé, nous utiliserons donc SET_NULL.
 
     def __str__(self):
         return f'{self.title}'
